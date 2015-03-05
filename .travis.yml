@@ -1,0 +1,15 @@
+language: cpp
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get -qq install g++-4.8
+
+compiler:
+  - gcc
+  - clang
+
+# Change this to your needs
+before_script:
+ - mkdir build && cd build
+script:
+ - CXX=g++-4.8 cmake .. && make 
+
