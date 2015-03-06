@@ -54,14 +54,16 @@ if (UNIX)
   link_libraries (dl)
 endif ()
 
-
 add_definitions (-DDO_ITT_NOTIFY)
 
-include (CheckCXXCompilerFlag)
-set (RTM_FLAGS "-mrtm")
-check_cxx_compiler_flag("${RTM_FLAGS}" _SUPPORT_RTM_FLAGS)
-if (_SUPPORT_RTM_FLAGS)
-  set (CMAKE_CXX_FLAGS "${RTM_FLAGS} ${CMAKE_CXX_FLAGS}")
+option(USE_RTM "use intel rtm" OFF)
+if (USE_RTM)
+  include (CheckCXXCompilerFlag)
+  set (RTM_FLAGS "-mrtm")
+  check_cxx_compiler_flag("${RTM_FLAGS}" _SUPPORT_RTM_FLAGS)
+  if (_SUPPORT_RTM_FLAGS)
+    set (CMAKE_CXX_FLAGS "${RTM_FLAGS} ${CMAKE_CXX_FLAGS}")
+  endif ()
 endif ()
 
 add_subdirectory (tbb)
