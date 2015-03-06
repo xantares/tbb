@@ -22,14 +22,21 @@ include_directories (${CMAKE_CURRENT_SOURCE_DIR})
 include_directories (${CMAKE_CURRENT_BINARY_DIR})
 
 
-macro (tbb_add_library libname sources)
-add_library (${libname} ${sources})
-set_target_properties (${libname} PROPERTIES SOVERSION 2)
-install (TARGETS ${libname}
-         RUNTIME DESTINATION bin
-         LIBRARY DESTINATION lib${LIB_SUFFIX}
-         ARCHIVE DESTINATION lib${LIB_SUFFIX})
+macro (tbb_add_library libname)
+  set (sources)
+  foreach(arg ${ARGN})
+    list (APPEND sources ${arg})
+  endforeach()
+
+  add_library (${libname} ${sources})
+  set_target_properties (${libname} PROPERTIES SOVERSION 2)
+  install (TARGETS ${libname}
+          RUNTIME DESTINATION bin
+          LIBRARY DESTINATION lib${LIB_SUFFIX}
+          ARCHIVE DESTINATION lib${LIB_SUFFIX})
 endmacro()
+
+
 
 if ("${CMAKE_BUILD_TYPE}" MATCHES Debug)
   add_definitions (-DTBB_USE_DEBUG)

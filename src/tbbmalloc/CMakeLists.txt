@@ -8,5 +8,4 @@ tbb_add_library (tbbmalloc
   large_objects.cpp
   backref.cpp
   tbbmalloc.cpp
-  itt_notify_malloc.cpp
   frontend.cpp)
