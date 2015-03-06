@@ -1,4 +1,4 @@
-option (USE_OPENMP "use omp" ON)
+option (USE_OPENMP "use omp" OFF)
 
 if (USE_OPENMP)
   find_package (OpenMP)
